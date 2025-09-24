@@ -38,8 +38,11 @@ function transformStateWithClones(state, actions) {
       default:
         throw new Error(`Unknown action type: ${action.type}`);
     }
-    values.push(newState);
-    currentState = newState;
+
+    if (typeof newState === 'object') {
+      values.push(newState);
+      currentState = newState;
+    }
   }
 
   return values;
